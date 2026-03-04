@@ -1,89 +1,114 @@
-const footerLinks = {
-  Services: [
-    "Emergency Response",
-    "Incident Investigation",
-    "Crisis Management",
-    "Safety Training",
-    "Regulatory Compliance",
-    "Risk Assessment",
-  ],
-  Company: ["About ERA Safety", "Our Team", "Careers", "Case Studies", "Blog"],
-  Resources: [
-    "OSHA Resources",
-    "Emergency Checklist",
-    "Safety Templates",
-    "Industry Reports",
-    "Contact Us",
-  ],
-};
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import { CampsiteIcon } from '@/components/SiteNavigationBar'
+import { WidthContainer } from '@/components/Layouts/WidthContainer'
+import { XIcon, LinkedInIcon, ThreadsIcon, GithubIcon } from '@/components/ui/Icons'
 
-export default function Footer() {
+export function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-400">
-      <div className="max-w-6xl mx-auto px-6 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-red-600 rounded-sm flex items-center justify-center">
-                <span className="text-white font-black text-sm">E</span>
-              </div>
-              <span className="font-bold text-white text-lg tracking-tight">
-                ERA<span className="text-red-500 ml-1">Safety</span>
-              </span>
-            </div>
-            <p className="text-sm leading-relaxed mb-4">
-              Expert incident response and emergency management — protecting
-              people, assets, and business continuity around the clock.
-            </p>
-            <div className="bg-red-900/30 border border-red-800/50 rounded-lg px-4 py-3">
-              <div className="text-red-400 font-bold text-xs uppercase tracking-wide mb-1">
-                Emergency Hotline
-              </div>
-              <div className="text-white font-mono font-bold">1-800-ERA-SAFE</div>
-            </div>
-          </div>
-
-          {/* Link columns */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">
-                {category}
-              </h4>
-              <ul className="space-y-2">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm hover:text-red-400 transition-colors"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-          <div>
-            © {new Date().getFullYear()} ERA Safety. All rights reserved.
-          </div>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-red-400 transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-red-400 transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-red-400 transition-colors">
-              Accessibility
-            </a>
-          </div>
-        </div>
+    <>
+      <div className="relative hidden dark:block">
+        <div className="absolute bottom-0 left-0 right-0 z-30 h-px bg-gradient-to-r from-white via-neutral-200 to-white dark:from-gray-950 dark:via-gray-750 dark:to-gray-950" />
       </div>
-    </footer>
-  );
+
+      <div className="flex w-full justify-center border-t py-12 md:py-16 lg:py-20 2xl:py-24 dark:border-transparent">
+        <WidthContainer className="grid grid-cols-1 gap-12 sm:grid-cols-5 sm:gap-6">
+          <div className="flex flex-col gap-6 sm:col-span-2">
+            <Link href="/" className="text-primary select-none">
+              <div className="flex items-center gap-1.5">
+                <CampsiteIcon />
+                <span className="text-primary text-lg font-semibold">Campsite</span>
+              </div>
+            </Link>
+            <div className="flex items-center gap-4">
+              {[
+                { icon: <XIcon />, label: 'X/Twitter', href: '#' },
+                { icon: <ThreadsIcon />, label: 'Threads', href: '#' },
+                { icon: <LinkedInIcon />, label: 'LinkedIn', href: '#' },
+                { icon: <GithubIcon />, label: 'GitHub', href: '#' },
+              ].map((social) => (
+                <Link
+                  key={social.label}
+                  className="text-quaternary hover:text-primary text-sm"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="sr-only">{social.label}</span>
+                  {social.icon}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <FooterSection>
+            <FooterSectionHeading>Product</FooterSectionHeading>
+            <FooterSectionLinks>
+              <FooterLink href="/pricing">Pricing</FooterLink>
+              <FooterLink href="/blog">Blog</FooterLink>
+              <FooterLink href="/changelog">Changelog</FooterLink>
+            </FooterSectionLinks>
+          </FooterSection>
+
+          <FooterSection>
+            <FooterSectionHeading>Apps &amp; integrations</FooterSectionHeading>
+            <FooterSectionLinks>
+              <FooterLink href="#">Desktop app</FooterLink>
+              <FooterLink href="#">API Docs</FooterLink>
+              <FooterLink href="#">Linear</FooterLink>
+              <FooterLink href="#">Zapier</FooterLink>
+              <FooterLink href="#">Figma</FooterLink>
+              <FooterLink href="#">Cal.com</FooterLink>
+            </FooterSectionLinks>
+          </FooterSection>
+
+          <div className="flex flex-col gap-12">
+            <FooterSection>
+              <FooterSectionHeading>About</FooterSectionHeading>
+              <FooterSectionLinks>
+                <FooterLink href="/contact">Contact</FooterLink>
+                <FooterLink href="#">Status</FooterLink>
+                <FooterLink href="/privacy">Privacy</FooterLink>
+                <FooterLink href="/terms">Terms</FooterLink>
+                <FooterLink href="#">DPA</FooterLink>
+                <FooterLink href="#">Cookies</FooterLink>
+              </FooterSectionLinks>
+            </FooterSection>
+
+            <FooterSection>
+              <FooterSectionHeading>Resources</FooterSectionHeading>
+              <FooterSectionLinks>
+                <FooterLink href="#">Slack glossary</FooterLink>
+              </FooterSectionLinks>
+            </FooterSection>
+          </div>
+        </WidthContainer>
+      </div>
+    </>
+  )
+}
+
+function FooterSection(props: React.HTMLProps<HTMLDivElement>) {
+  return <div className="col-span-1 flex flex-col gap-1" {...props} />
+}
+
+function FooterSectionHeading({ children, ...props }: React.HTMLProps<HTMLDivElement>) {
+  return (
+    <div className="text-primary py-1 text-sm font-medium" {...props}>
+      {children}
+    </div>
+  )
+}
+
+function FooterSectionLinks(props: React.HTMLProps<HTMLDivElement>) {
+  return <div className="col-span-2 -mx-1 flex flex-wrap gap-2 sm:flex-col" {...props} />
+}
+
+function FooterLink({ href, className, children, ...rest }: React.HTMLProps<HTMLAnchorElement>) {
+  if (!href) return null
+  return (
+    <Link href={href} className={cn('text-tertiary hover:text-primary p-1 text-sm', className)} {...rest}>
+      {children}
+    </Link>
+  )
 }

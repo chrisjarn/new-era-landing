@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ERA Safety | Incident Response & Emergency Management",
+  title: "Campsite — Teamwork, meet deep work",
   description:
-    "ERA Safety delivers rapid, expert incident response and emergency management solutions that protect your people, assets, and business continuity.",
+    "The new standard for thoughtful team communication — replace noisy chats with focused, organized posts.",
 };
 
 export default function RootLayout({
@@ -14,8 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={GeistSans.variable} suppressHydrationWarning>
-      <body className="antialiased">{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-100">
+        <div className="relative flex min-h-[100svh] flex-1 flex-col">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
